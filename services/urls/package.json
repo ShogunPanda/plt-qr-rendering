@@ -1,0 +1,21 @@
+{
+  "name": "urls",
+  "scripts": {
+    "start": "platformatic start",
+    "test": "borp",
+    "clean": "rm -fr ./dist",
+    "build": "platformatic compile"
+  },
+  "devDependencies": {
+    "borp": "^0.13.0",
+    "fastify": "^4.26.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@fastify/type-provider-json-schema-to-ts": "^3.0.0",
+    "@platformatic/service": "^1.39.0"
+  },
+  "engines": {
+    "node": "^18.8.0 || >=20.6.0"
+  }
+}

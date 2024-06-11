@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Platformatic QR Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url(https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css);
+
+      html {
+        font-size: 10pt;
+        font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-size: 16pt;
+      }
+
+      main {
+        display: grid;
+        grid-template: "a a" "b b" "c c" "d e" / 1fr 1fr;
+        grid-gap: 1rem;
+      }
+
+      h1 {
+        grid-area: a;
+      }
+
+      label {
+        grid-area: b;
+      }
+
+      input {
+        display: block;
+        min-width: 40rem;
+        grid-area: c;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 2px solid #c0c0c0;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #808080;
+      }
+
+      button {
+        grid-area: e;
+        border: 0;
+        background-color: #008800;
+        color: white;
+        padding: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover,
+      button:active,
+      button:focus {
+        background-color: #00aa00;
+      }
+
+      button.disabled {
+        background-color: #e0e0e0;
+        opacity: 0.8;
+        pointer-events: none;
+        cursor: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import {
+        html,
+        render,
+        useState,
+      } from "https://esm.sh/htm/preact/standalone";
+
+      function App(props) {
+        const [url, setUrl] = useState("");
+        const [valid, setValid] = useState(false);
+
+        async function handleSubmit(e) {
+          if ((e.key && e.key !== "Enter") || !valid) {
+            return;
+          }
+
+          e.preventDefault();
+
+          const res = await fetch("/urls/", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ url }),
+          });
+
+          if (res.status !== 200) {
+            console.error(await res.text());
+          }
+
+          const shortened = await res.json();
+          location.href = shortened.url;
+        }
+
+        function handleChange(e) {
+          const candidate = e.currentTarget.value;
+          setUrl(candidate);
+
+          try {
+            const url = new URL(candidate);
+
+            if (!url.protocol.startsWith("http")) {
+              setValid(false);
+              return;
+            }
+          } catch (e) {
+            setValid(false);
+            return;
+          }
+
+          setValid(true);
+        }
+
+        return html`
+          <main>
+            <h1>Platformatic QR Demo</h1>
+
+            <label>Enter a valid URL:</label>
+
+            <input
+              name="url"
+              type="url"
+              value=${url}
+              onInput=${handleChange}
+              onKeyPress=${handleSubmit}
+            />
+
+            <button onClick=${handleSubmit} class="${!valid && "disabled"}">
+              Get the QR code!
+            </button>
+          </main>
+        `;
+      }
+
+      render(html`<${App} />`, document.body);
+    </script>
+  </body>
+</html>
