@@ -1,0 +1,7 @@
+{
+  "name": "database",
+  "type": "module",
+  "dependencies": {
+    "@platformatic/db": "^2.11.0"
+  }
+}

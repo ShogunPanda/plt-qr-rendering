@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "@platformatic/service": "^2.11.0"
+  }
+}

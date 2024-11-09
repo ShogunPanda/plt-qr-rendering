@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "@platformatic/node": "^2.11.0",
+    "qrcode-generator": "^1.4.4"
+  }
+}

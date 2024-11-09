@@ -1,11 +1,11 @@
 # Platformatic Runtime API
 
-This is a generated [Platformatic Runtime](https://docs.platformatic.dev/docs/reference/runtime/introduction) application.
+This is a generated [Watt](https://docs.platformatic.dev/docs/watt/overview) application.
 
 ## Requirements
 
 Platformatic supports macOS, Linux and Windows ([WSL](https://docs.microsoft.com/windows/wsl/) recommended).
-You'll need to have [Node.js](https://nodejs.org/) >= v18.8.0 or >= v20.6.0
+You'll need to have [Node.js](https://nodejs.org/) >= v20.18.0 or >= v22.5.0
 
 ## Setup
 
@@ -23,10 +23,6 @@ Run the API with:
 npm start
 ```
 
-## Adding a Service
+## Getting started with Watt
 
-Adding a new service to this project is as simple as running `create-platformatic` again, like so:
-
-```
-npx create-platformatic
-```
+Follow our [quick start guide](https://docs.platformatic.dev/docs/getting-started/quick-start-watt).

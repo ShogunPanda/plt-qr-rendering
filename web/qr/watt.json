@@ -1,0 +1,4 @@
+{
+  "$schema": "https://schemas.platformatic.dev/@platformatic/node/2.11.0.json",
+  "watch": true
+}

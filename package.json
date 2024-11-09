@@ -1,22 +1,15 @@
 {
   "name": "plt-qr-rendering",
-  "workspaces": [
-    "services/*"
-  ],
+  "private": true,
   "scripts": {
-    "start": "platformatic start",
-    "clean": "rm -fr ./dist",
-    "build": "platformatic compile"
-  },
-  "devDependencies": {
-    "fastify": "^4.26.2",
-    "borp": "^0.13.0",
-    "typescript": "^5.4.2"
+    "dev": "wattpm dev",
+    "build": "wattpm build",
+    "start": "wattpm start"
   },
   "dependencies": {
-    "platformatic": "^1.39.0"
+    "wattpm": "^2.11.0"
   },
-  "engines": {
-    "node": "^18.8.0 || >=20.6.0"
-  }
+  "workspaces": [
+    "web/*"
+  ]
 }

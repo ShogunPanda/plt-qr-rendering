@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.platformatic.dev/@platformatic/db/2.11.0.json",
+  "db": {
+    "connectionString": "{PLT_DATABASE_DATABASE_URL}",
+    "graphql": true,
+    "openapi": true,
+    "schemalock": true
+  },
+  "watch": {
+    "ignore": ["*.sqlite", "*.sqlite-journal"]
+  },
+  "migrations": {
+    "dir": "migrations",
+    "autoApply": "{PLT_DATABASE_APPLY_MIGRATIONS}"
+  },
+  "plugins": {
+    "paths": ["./routes"],
+    "typescript": "{PLT_DATABASE_TYPESCRIPT}"
+  }
+}
