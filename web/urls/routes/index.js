@@ -105,7 +105,7 @@ export default function (server) {
     }
   )
 
-  server.get('/stats', async function (reply) {
+  server.get('/stats', async function (_, reply) {
     const response = await fetch('http://database.plt.local/urls')
 
     if (response.status !== 200) {
