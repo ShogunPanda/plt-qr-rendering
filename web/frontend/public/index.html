@@ -1,21 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>Platformatic QR Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <style>
       @import url(https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css);
 
       html {
         font-size: 10pt;
-        font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-          "Segoe UI Emoji", "Segoe UI Symbol";
+        font-family:
+          Roboto,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif,
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol';
       }
 
       body {
@@ -29,7 +35,7 @@
 
       main {
         display: grid;
-        grid-template: "a a" "b b" "c c" "d e" / 1fr 1fr;
+        grid-template: 'a a' 'b b' 'c c' 'd e' / 1fr 1fr;
         grid-gap: 1rem;
       }
 
@@ -81,56 +87,52 @@
   </head>
   <body>
     <script type="module">
-      import {
-        html,
-        render,
-        useState,
-      } from "https://esm.sh/htm/preact/standalone";
+      import { html, render, useState } from 'https://esm.sh/htm/preact/standalone'
 
       function App(props) {
-        const [url, setUrl] = useState("");
-        const [valid, setValid] = useState(false);
+        const [url, setUrl] = useState('')
+        const [valid, setValid] = useState(false)
 
         async function handleSubmit(e) {
-          if ((e.key && e.key !== "Enter") || !valid) {
-            return;
+          if ((e.key && e.key !== 'Enter') || !valid) {
+            return
           }
 
-          e.preventDefault();
+          e.preventDefault()
 
-          const res = await fetch("/urls/", {
-            method: "POST",
+          const res = await fetch('/urls/', {
+            method: 'POST',
             headers: {
-              "content-type": "application/json",
+              'content-type': 'application/json'
             },
-            body: JSON.stringify({ url }),
-          });
+            body: JSON.stringify({ url })
+          })
 
           if (res.status !== 200) {
-            console.error(await res.text());
+            console.error(await res.text())
           }
 
-          const shortened = await res.json();
-          location.href = shortened.url;
+          const shortened = await res.json()
+          location.href = shortened.url
         }
 
         function handleChange(e) {
-          const candidate = e.currentTarget.value;
-          setUrl(candidate);
+          const candidate = e.currentTarget.value
+          setUrl(candidate)
 
           try {
-            const url = new URL(candidate);
+            const url = new URL(candidate)
 
-            if (!url.protocol.startsWith("http")) {
-              setValid(false);
-              return;
+            if (!url.protocol.startsWith('http')) {
+              setValid(false)
+              return
             }
           } catch (e) {
-            setValid(false);
-            return;
+            setValid(false)
+            return
           }
 
-          setValid(true);
+          setValid(true)
         }
 
         return html`
@@ -139,22 +141,14 @@
 
             <label>Enter a valid URL:</label>
 
-            <input
-              name="url"
-              type="url"
-              value=${url}
-              onInput=${handleChange}
-              onKeyPress=${handleSubmit}
-            />
+            <input name="url" type="url" value=${url} onInput=${handleChange} onKeyPress=${handleSubmit} />
 
-            <button onClick=${handleSubmit} class="${!valid && "disabled"}">
-              Get the QR code!
-            </button>
+            <button onClick=${handleSubmit} class="${!valid && 'disabled'}">Get the QR code!</button>
           </main>
-        `;
+        `
       }
 
-      render(html`<${App} />`, document.body);
+      render(html`<${App} />`, document.body)
     </script>
   </body>
 </html>

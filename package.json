@@ -1,15 +1,23 @@
 {
   "name": "plt-qr-rendering",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "wattpm dev",
     "build": "wattpm build",
-    "start": "wattpm start"
+    "start": "wattpm start",
+    "format": "prettier -w web",
+    "lint": "eslint --cache"
   },
   "dependencies": {
     "wattpm": "^2.11.0"
   },
   "workspaces": [
     "web/*"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "neostandard": "^0.11.7",
+    "prettier": "^3.3.3"
+  }
 }

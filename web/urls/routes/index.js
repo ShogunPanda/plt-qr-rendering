@@ -1,3 +1,4 @@
+import { errorCodes } from 'fastify'
 import { randomUUID } from 'node:crypto'
 
 export default function (server) {
@@ -104,7 +105,7 @@ export default function (server) {
     }
   )
 
-  server.get('/stats', async function (request) {
+  server.get('/stats', async function (reply) {
     const response = await fetch('http://database.plt.local/urls')
 
     if (response.status !== 200) {
